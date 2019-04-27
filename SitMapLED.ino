@@ -105,6 +105,7 @@ void setup()
 void loop()
 {
   int oledLine = 0;
+  int httpCode = 0;
    /*
    //TEST LOCATIONS
    int LX = LatLonToPixel(38.7,-9.1);
@@ -139,7 +140,7 @@ void loop()
     HTTPClient http; 
     //Specify request destination
     http.begin(HTTP_ENDPOINT);  
-    int httpCode = http.GET();                                                                 
+    httpCode = http.GET();                                                                 
      //Check the returning code
     if (httpCode == 200) {
      
@@ -200,7 +201,9 @@ void loop()
   Serial.println("Sleeping...");
   delay(3337);
   
-  //clear LED strip and OLED
-  for (int k=0;k<PixelCount;k++) strip.SetPixelColor(k,RgbColor(0,0,0));
-  display.clearDisplay();
+  if (httpCode == 200) {
+    //clear LED strip and OLED
+    for (int k=0;k<PixelCount;k++) strip.SetPixelColor(k,RgbColor(0,0,0));
+    display.clearDisplay();
+  }
 }
