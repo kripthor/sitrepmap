@@ -192,12 +192,13 @@ void loop()
     int led = LatLonToPixel(lat,lon);
     strip.SetPixelColor(led, timeToColor(led,timeElapsed));
     }
+    display.display();
+    strip.Show();
   }
   http.end();   //Close connection
   }
 
-  display.display();
-  strip.Show();
+ 
   Serial.println("Sleeping...");
   delay(3337);
   
